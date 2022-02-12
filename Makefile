@@ -9,3 +9,6 @@ search_user:
 
 project_check:
 	python -m automagit.automate_git project_check
+
+commit:
+	python -m automagit.automate_git commit_with_message --param 'changed function for commit'
