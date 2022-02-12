@@ -3,3 +3,9 @@ init:
 
 test:
 	nosetests tests
+
+search_user:
+	python -m automagit.automate_git search_user 404answernotfound
+
+project_check:
+	python -m automagit.automate_git project_check

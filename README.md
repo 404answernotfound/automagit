@@ -14,7 +14,7 @@
 ## Usage
 
 ```sh
-python -m automagittron.automate_git [username]ß
+python -m automagit.automate_git [function] [parameters,[...]]
 ```
 
 ## Author

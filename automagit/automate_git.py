@@ -38,7 +38,7 @@ def parse_args(args):
     """
     parser = argparse.ArgumentParser(description="Automated Gittron Automata, AGA")
     parser.add_argument(dest="function", help="function to run", type=str, metavar="STRING")
-    parser.add_argument(dest="parameter", help="function parameters", type=str, metavar="STRING")
+    parser.add_argument('--param', dest="parameter", help="function parameters", type=str, metavar="STRING")
     parser.add_argument(
         "-v",
         "--verbose",
