@@ -37,7 +37,8 @@ def parse_args(args):
       :obj:`argparse.Namespace`: command line parameters namespace
     """
     parser = argparse.ArgumentParser(description="Automated Gittron Automata, AGA")
-    parser.add_argument(dest="username", help="username to spy on", type=str, metavar="STRING")
+    parser.add_argument(dest="function", help="function to run", type=str, metavar="STRING")
+    parser.add_argument(dest="parameter", help="function parameters", type=str, metavar="STRING")
     parser.add_argument(
         "-v",
         "--verbose",
@@ -73,21 +74,21 @@ def search_user(username):
     response = requests.get("https://api.github.com/users/{}/followers".format(username))
     response = response.json()
         
-    with open('automagittron/logs/{}.txt'.format(today), 'w') as file:
+    with open('logs/{}.txt'.format(today), 'w') as file:
         for i, res in enumerate(response):
             file.write(str(res) + '\n')
             
     commit_to_repo()
             
 def print_today_logs():
-    with open('automagittron/logs/{}.txt'.format(today)) as file:
+    with open('logs/{}.txt'.format(today)) as file:
         lines = file.readlines()
         for line in lines:
             print(line)
             
 def commit_to_repo():
     os.system('ls -la')
-    os.system('git add * && git commit -m "automagittron is uploading new log file {}" && git push https://404answernotfound@github.com/404answernotfound/automagittron'.format(today))
+    os.system('git add * && git commit -m "automagittron is uploading new log file {}" && git push https://404answernotfound@github.com/404answernotfound/automagit'.format(today))
     print('Committed changes to repo')
     
 def main(args):
@@ -99,7 +100,11 @@ def main(args):
     args = parse_args(args)
     setup_logging(args.loglevel)
     _logger.debug("Starting crazy automata...")
-    search_user(args.username)
+    print(args)
+    if(args.function == 'project_check'):
+        project_check()
+    if(args.function == 'search_user'):
+        search_user(args.parameter)
     print("Automagittron is working")
     _logger.info("Script ends here")
 
