@@ -88,7 +88,12 @@ def print_today_logs():
             
 def commit_to_repo():
     os.system('ls -la')
-    os.system('git add * && git commit -m "automagittron is uploading new log file {}" && git push https://404answernotfound@github.com/404answernotfound/automagit'.format(today))
+    os.system('git add * && git commit -m "automagit is uploading new log file {}" && git push https://404answernotfound@github.com/404answernotfound/automagit'.format(today))
+    print('Committed changes to repo')
+
+def commit_with_message(commit_message):
+    os.system('ls -la')
+    os.system('git add * && git commit -m "automagit -m {}" && git push https://404answernotfound@github.com/404answernotfound/automagit'.format(commit_message))
     print('Committed changes to repo')
     
 def main(args):
@@ -105,6 +110,8 @@ def main(args):
         project_check()
     if(args.function == 'search_user'):
         search_user(args.parameter)
+    if(args.function == 'commit_with_message'):
+        commit_with_message(args.parameter)
     print("Automagittron is working")
     _logger.info("Script ends here")
 
