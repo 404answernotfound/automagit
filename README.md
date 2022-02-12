@@ -14,7 +14,8 @@
 ## Usage
 
 ```sh
-python -m automagit.automate_git [function] [parameters,[...]]
+# --param optional parameter flag
+python -m automagit.automate_git [function] --param [parameters,[...]]
 ```
 
 ## Author
