@@ -1,25 +1,12 @@
-"""This script will automate requests to github's RESTful api 
-    to check for differences between previous day and new day followers for account
-"""
-
 import argparse
 import sys
-import requests
 import os
 from yaml import load, FullLoader
-
-from datetime import date
+from .utils import search_user, check_config, project_check
 
 __author__ = "404answernotfound"
 __copyright__ = "404answernotfound"
 __license__ = "MIT"
-
-today = date.today().strftime("%d%m%Y")
-
-# ---- CLI ----
-# The functions defined in this section are wrappers around the main Python
-# API allowing them to be called directly from the terminal as a CLI
-# executable/script.
 
 def parse_args(args):
     """Parse command line parameters
@@ -36,29 +23,6 @@ def parse_args(args):
     parser.add_argument('--param', dest="parameter", help="function parameters", type=str, metavar="STRING")
 
     return parser.parse_args(args)
-
-def search_user(username):
-    print('search_user was called')
-    response = requests.get("https://api.github.com/users/{}/followers".format(username))
-    response = response.json()
-        
-    with open('logs/{}.txt'.format(today), 'w') as file:
-        for i, res in enumerate(response):
-            file.write(str(res) + '\n')
-
-    with open('config/automa.yaml') as config:
-            data = load(config, Loader=FullLoader)
-            functions = data["automa"]["functions"]
-            os.system(functions["commit"]["eval"])
-
-def project_check():
-    """Returns the answer"""
-    print('42')
-
-def check_config():
-    with open('config/automa.yaml') as config:
-        data = load(config, Loader=FullLoader)
-        print('Working')
     
 def main(args):
     """
@@ -88,18 +52,8 @@ def main(args):
 
 
 def run():
-    """Calls :func:`main` passing the CLI arguments extracted from :obj:`sys.argv`
-
-    This function can be used as entry point to create console scripts with setuptools.
-    """
     main(sys.argv[1:])
 
 
 if __name__ == "__main__":
-    # ^  This is a guard statement that will prevent the following code from
-    #    being executed in the case someone imports this file instead of
-    #    executing it as a script.
-
-    # After installing your project with pip, users can also run your Python
-    # modules as scripts via the ``-m`` flag, as defined in PEP 338::
     run()
