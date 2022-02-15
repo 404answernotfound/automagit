@@ -1,0 +1,15 @@
+automa:
+  function_list:
+    search_user
+    project_check
+    commit_with_message
+  functions:
+    search_user:
+      args: username
+      eval: None
+    commit:
+      args: message
+      eval: git add * && git commit -m \"automata committed changes\" && git push https://404answernotfound@github.com/404answernotfound/automagit
+    commit_with_message:
+      args: message
+      eval: git add * && git commit -m \"{}\" && git push https://404answernotfound@github.com/404answernotfound/automagit
