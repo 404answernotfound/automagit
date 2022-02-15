@@ -7,7 +7,7 @@ import logging
 import sys
 import requests
 import os
-from yaml import load, dump
+from yaml import load, dump, FullLoader
 
 from datetime import date
 
@@ -17,8 +17,6 @@ __license__ = "MIT"
 
 _logger = logging.getLogger(__name__)
 today = date.today().strftime("%d%m%Y")
-data = None
-
 
 # ---- CLI ----
 # The functions defined in this section are wrappers around the main Python
@@ -38,6 +36,7 @@ def parse_args(args):
     parser = argparse.ArgumentParser(description="Automated Gittron Automata, AGA")
     parser.add_argument(dest="function", help="function to run", type=str, metavar="STRING")
     parser.add_argument('--param', dest="parameter", help="function parameters", type=str, metavar="STRING")
+
     return parser.parse_args(args)
 
 def search_user(username):
@@ -72,10 +71,9 @@ def project_check():
     print('42')
 
 def check_config():
-    with open('config/automata.yaml') as config:
-        data = load(config, Loader=yaml.FullLoader)
-        print(data)
-    print('42')
+    with open('config/automa.yaml') as config:
+        data = load(config, Loader=FullLoader)
+        print('Working')
     
 def main(args):
     """
@@ -84,17 +82,23 @@ def main(args):
           (for example  ``["--verbose", "42"]``).
     """
     args = parse_args(args)
-    print(args)
-    if(args.function == 'project_check'):
-        project_check()
-    if(args.function == 'check_config'):
-        check_config()
-    if(args.function == 'search_user'):
-        search_user(args.parameter)
-    if(args.function == 'commit_with_message'):
-        commit_with_message(args.parameter)
-    print("Automagittron is working")
-    _logger.info("Script ends here")
+    # Config test
+    functions = None
+    with open('config/automa.yaml') as config:
+            data = load(config, Loader=FullLoader)
+            functions = data["automa"]["functions"]
+
+    if args.function in functions:
+        os.system('echo "# Starting a function call"')
+        if functions[args.function]["args"] is None:
+            os.system(functions[args.function]["eval"])
+        else:
+            os.system(functions[args.function]["eval"].format(args.parameter))
+
+    else:
+        pass
+    # End config test
+    print("Automagit is working")
 
 
 def run():
