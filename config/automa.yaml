@@ -5,11 +5,17 @@ automa:
     commit_with_message
   functions:
     check_config:
+      system: False
       args: None
       eval: ls -la
+    try_scheduler:
+      system: False
+      args: None
+      eval: echo "Schedule is working as expected"
     check_param:
+      system: False
       args: echo
-      eval: echo \"{}\"
+      eval: echo "{}"
     search_user:
       system: False
       args: 404answernotfound

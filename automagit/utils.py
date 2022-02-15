@@ -28,3 +28,4 @@ def check_config():
     with open('config/automa.yaml') as config:
         data = load(config, Loader=FullLoader)
         print('Working')
+

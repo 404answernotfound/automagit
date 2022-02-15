@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to automagittron 👋</h1>
+<h1 align="center">Welcome to Automagit 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://twitter.com/404answnotfound" target="_blank">
@@ -6,7 +6,7 @@
   </a>
 </p>
 
-> A hungry bot looking for differences between followers in my github profile, day by day
+> A hungry bot that executes your command by YAML configuration
 
 ## Check the latest blog posts!
 ### 🏠 [404answernotfound blog](https://404answernotfound.eu)
@@ -15,7 +15,7 @@
 
 ```sh
 # --param optional parameter flag
-python -m automagit.automate_git [function] --param [parameters,[...]]
+python -m automagit.automate [function] --param [parameters,[...]]
 ```
 
 ## Author
