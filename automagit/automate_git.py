@@ -40,17 +40,6 @@ def parse_args(args):
     parser.add_argument('--param', dest="parameter", help="function parameters", type=str, metavar="STRING")
     return parser.parse_args(args)
 
-    
-def project_check():
-    """Returns the answer"""
-    print('42')
-
-def check_config():
-    with open('config/automata.yaml') as config:
-        data = load(config, Loader=yaml.FullLoader)
-        print(data)
-    print('42')
-
 def search_user(username):
     print(os.getcwd(), os.listdir())
     response = requests.get("https://api.github.com/users/{}/followers".format(username))
@@ -77,6 +66,16 @@ def commit_with_message(commit_message):
     os.system('ls -la')
     os.system('git add * && git commit -m "automagit -m {}" && git push https://404answernotfound@github.com/404answernotfound/automagit'.format(commit_message))
     print('Committed changes to repo')
+
+def project_check():
+    """Returns the answer"""
+    print('42')
+
+def check_config():
+    with open('config/automata.yaml') as config:
+        data = load(config, Loader=yaml.FullLoader)
+        print(data)
+    print('42')
     
 def main(args):
     """
