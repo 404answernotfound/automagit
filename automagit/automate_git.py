@@ -47,6 +47,8 @@ def search_user(username):
     with open('logs/{}.txt'.format(today), 'w') as file:
         for i, res in enumerate(response):
             file.write(str(res) + '\n')
+
+    print(response)
             
     commit_to_repo()
             
