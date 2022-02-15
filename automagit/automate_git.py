@@ -3,11 +3,10 @@
 """
 
 import argparse
-import logging
 import sys
 import requests
 import os
-from yaml import load, dump, FullLoader
+from yaml import load, FullLoader
 
 from datetime import date
 
@@ -15,7 +14,6 @@ __author__ = "404answernotfound"
 __copyright__ = "404answernotfound"
 __license__ = "MIT"
 
-_logger = logging.getLogger(__name__)
 today = date.today().strftime("%d%m%Y")
 
 # ---- CLI ----
@@ -40,7 +38,7 @@ def parse_args(args):
     return parser.parse_args(args)
 
 def search_user(username):
-    print(os.getcwd(), os.listdir())
+    print('search_user was called')
     response = requests.get("https://api.github.com/users/{}/followers".format(username))
     response = response.json()
         
@@ -48,25 +46,10 @@ def search_user(username):
         for i, res in enumerate(response):
             file.write(str(res) + '\n')
 
-    print(response)
-            
-    commit_to_repo()
-            
-def print_today_logs():
-    with open('logs/{}.txt'.format(today)) as file:
-        lines = file.readlines()
-        for line in lines:
-            print(line)
-            
-def commit_to_repo():
-    os.system('ls -la')
-    os.system('git add * && git commit -m "automagit is uploading new log file {}" && git push https://404answernotfound@github.com/404answernotfound/automagit'.format(today))
-    print('Committed changes to repo')
-
-def commit_with_message(commit_message):
-    os.system('ls -la')
-    os.system('git add * && git commit -m "automagit -m {}" && git push https://404answernotfound@github.com/404answernotfound/automagit'.format(commit_message))
-    print('Committed changes to repo')
+    with open('config/automa.yaml') as config:
+            data = load(config, Loader=FullLoader)
+            functions = data["automa"]["functions"]
+            os.system(functions["commit"]["eval"])
 
 def project_check():
     """Returns the answer"""
@@ -84,7 +67,6 @@ def main(args):
           (for example  ``["--verbose", "42"]``).
     """
     args = parse_args(args)
-    # Config test
     functions = None
     with open('config/automa.yaml') as config:
             data = load(config, Loader=FullLoader)
@@ -101,7 +83,7 @@ def main(args):
 
     else:
         pass
-    # End config test
+
     print("Automagit is working")
 
 

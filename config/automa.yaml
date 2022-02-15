@@ -15,8 +15,8 @@ automa:
       args: 404answernotfound
       eval: search_user("404answernotfound")
     commit:
-      args: message
-      eval: git add * && git commit -m \"automata committed changes\" && git push https://404answernotfound@github.com/404answernotfound/automagit
+      args: None
+      eval: git add * && git commit -m "automata committed changes" && git push https://404answernotfound@github.com/404answernotfound/automagit
     commit_with_message:
       args: message
       eval: git add * && git commit -m "{}" && git push https://404answernotfound@github.com/404answernotfound/automagit
