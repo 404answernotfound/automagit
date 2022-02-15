@@ -90,7 +90,9 @@ def main(args):
 
     if args.function in functions:
         os.system('echo "# Starting a function call"')
-        if functions[args.function]["args"] is None:
+        if functions[args.function]["system"] is False:
+            eval(functions[args.function]["eval"])
+        elif functions[args.function]["args"] is None:
             os.system(functions[args.function]["eval"])
         else:
             os.system(functions[args.function]["eval"].format(args.parameter))
